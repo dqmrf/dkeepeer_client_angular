@@ -7,7 +7,9 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class AuthService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private url = "http://localhost:3000/oauth/authorize/?client_id=666487d55b3fdb7cd8a32c2a93cdad8213efe8e46ec8dad62a58c314c42a85c8&redirect_uri=http://localhost:4200/&response_type=code";
+  private url = "http://localhost:3000/oauth/token" +
+    "?client_id=666487d55b3fdb7cd8a32c2a93cdad8213efe8e46ec8dad62a58c314c42a85c8" +
+    "&grant_type=password";
 
   constructor(
     private http: Http,
@@ -19,6 +21,8 @@ export class AuthService {
     return this.http.post(this.url, body, {headers: this.headers}).subscribe(
       response => {
         console.log(response);
+        localStorage.setItem('access_token', response.json().access_token);
+        // this.router.navigate(['Tasks']);
       },
       error => {
         console.log(error.text());
@@ -26,25 +30,17 @@ export class AuthService {
     );
   }
 
-  // login() {
-  //   this.http.get(this.url, { headers: this.headers }).subscribe(
-  //     response => {
-  //       // localStorage.setItem('access_token', response.json().code);
-  //       console.log(response.json());
-  //       // this.router.navigate(['Tasks']);
-  //     },
-  //     error => {
-  //       alert(error.text());
-  //     }
-  //   );
-  // }
+  logout() {
+    localStorage.clear();
+    // this.router.navigate(['Login']);
+  }
 
-  // login(): Promise<Object> {
-  //   return this.http.get(this.url)
-  //     .toPromise()
-  //     .then(res => res.json() as Object)
-  //     .catch(this.handleError);
-  // }
+  // private url = "http://localhost:3000/oauth/authorize/" +
+  //   "?client_id=666487d55b3fdb7cd8a32c2a93cdad8213efe8e46ec8dad62a58c314c42a85c8" +
+  //   "&client_secret=816a014644b7f1b08a5c7a37f39ba17392e05f45a3d200ff4730f0de932fa3c3" +
+  //   "&grant_type=client_credentials";
+  //   // "&redirect_uri=http://localhost:4200/" +
+  //   // "&response_type=code";
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
