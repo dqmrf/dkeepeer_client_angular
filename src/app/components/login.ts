@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService }       from '../auth/auth.service';
-import { User }              from '../user';
+import { AuthService }       from '../services/auth.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'home',
-  templateUrl: 'home.component.html'
+  selector: 'login',
+  templateUrl: '../templates/login.component.html'
 })
 
-export class HomeComponent implements OnInit {
+export class LoginComponent implements OnInit {
   user: {};
 
   constructor(private _authService: AuthService) {
