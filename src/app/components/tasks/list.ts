@@ -1,6 +1,8 @@
-import { Component, Directive }  from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Task }       from '../../models/task';
+import { Component, Directive, OnInit }  from '@angular/core';
+import { Router }                from '@angular/router';
+import { Observable }            from 'rxjs/Observable';
+import { TaskService }           from '../../services/task';
+import { Task }                  from '../../models/task';
 
 @Component({
   selector: 'task-list',
@@ -9,6 +11,21 @@ import { Task }       from '../../models/task';
   templateUrl: '../../templates/tasks/list.html',
 })
 
-export class TaskListComponent {
-  tasks: Observable<Task[]>;
+export class TaskListComponent implements OnInit {
+  tasks: Task[];
+
+  constructor(
+    private router: Router,
+    private _taskService: TaskService
+  ) {}
+
+  getTasks(): void {
+    this._taskService.getTasks().then(tasks => {
+      this.tasks = tasks
+    });
+  }
+
+  ngOnInit(): void {
+    this.getTasks();
+  }
 }

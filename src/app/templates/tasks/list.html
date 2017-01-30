@@ -1,1 +1,7 @@
 <h4>Tasks list</h4>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let task of tasks">
+    <span class="task-id">{{task.id}}</span>
+    <span class="task-name">{{task.title}}</span>
+  </li>
+</ul>

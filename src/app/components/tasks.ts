@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable }        from '@angular/core';
 import { Component }         from '@angular/core';
-// import { CanActivate }       from '@angular/router';
 import { TaskListComponent } from '../components/tasks/list';
 
 @Component({

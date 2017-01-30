@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OnInit }    from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['../styles/app.css']
 })
 
-export class AppComponent {}
+export class AppComponent implements OnInit {
+  ngOnInit() {}
+}

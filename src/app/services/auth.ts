@@ -22,6 +22,7 @@ export class AuthService {
       response => {
         localStorage.setItem('access_token', response.json().access_token);
         this.router.navigate(['/tasks']);
+        // window.location.pathname = '/tasks';
       },
       error => {
         console.log(error.text());
@@ -30,20 +31,27 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('access_token');
     this.router.navigate(['/login']);
   }
 
   isLoggedIn() {
     if(!localStorage.getItem('access_token')) {
-      this.router.navigate(['/login']);
       return false;
     }
     return true;
   }
 
+  getAccessToken(): any {
+    let token = localStorage.getItem('access_token');
+    if (token) {
+      return token;
+    }
+    return false;
+  }
+
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
+    console.error('An error occurred: ', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 }

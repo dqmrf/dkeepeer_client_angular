@@ -4,6 +4,7 @@ import { FormsModule }             from '@angular/forms';
 import { HttpModule }              from '@angular/http';
 import { AppRoutingModule }        from './app.routes';
 import { AuthService }             from './services/auth';
+import { TaskService }             from './services/task';
 import { AuthGuard }               from './services/auth-guard';
 import { AppComponent }            from './components/app';
 import { LoginComponent }          from './components/login';
@@ -29,6 +30,7 @@ import { TaskListComponent }       from './components/tasks/list';
   ],
   providers: [
     AuthService,
+    TaskService,
     AuthGuard
   ],
   bootstrap: [ AppComponent ]
