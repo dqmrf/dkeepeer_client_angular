@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService }       from '../services/auth.service';
+import { AuthService }       from '../services/auth';
 
 @Component({
   moduleId: module.id,
   selector: 'login',
-  templateUrl: '../templates/login.component.html'
+  templateUrl: '../templates/login.html'
 })
 
 export class LoginComponent implements OnInit {

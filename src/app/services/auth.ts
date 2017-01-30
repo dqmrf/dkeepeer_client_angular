@@ -20,9 +20,8 @@ export class AuthService {
     let body = JSON.stringify(user);
     return this.http.post(this.url, body, {headers: this.headers}).subscribe(
       response => {
-        console.log(response);
         localStorage.setItem('access_token', response.json().access_token);
-        // this.router.navigate(['Tasks']);
+        this.router.navigate(['/tasks']);
       },
       error => {
         console.log(error.text());
@@ -32,7 +31,15 @@ export class AuthService {
 
   logout() {
     localStorage.clear();
-    // this.router.navigate(['Login']);
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn() {
+    if(!localStorage.getItem('access_token')) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    return true;
   }
 
   private handleError(error: any): Promise<any> {

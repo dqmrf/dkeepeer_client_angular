@@ -1,5 +1,5 @@
 <form class="form-signin" (ngSubmit)="login()">
-  <h2 class="form-signin-heading">Please login</h2>
+  <h3 class="form-signin-heading">Please login</h3>
   <div class="form-group">
     <label for="inputEmail">Email address</label>
     <input [(ngModel)]="user.email" name="email" type="email" class="form-control" id="inputEmail" placeholder="Email">
@@ -11,11 +11,5 @@
   <button type="submit" class="btn btn-default">
     Login
   </button>
-  <!-- Future... -->
-  <!-- <a class="btn btn-lg btn-info btn-block" [routerLink]="['Registration']">Sign up</a> -->
+  <a class="btn btn-lg btn-info btn-block" routerLink="/registration">Sign up</a>
 </form>
-
-<!-- Test link -->
-<a href="http://localhost:3000/oauth/authorize/?client_id=666487d55b3fdb7cd8a32c2a93cdad8213efe8e46ec8dad62a58c314c42a85c8&redirect_uri=http://127.0.0.1:4200/&response_type=code">
-  Login
-</a>
