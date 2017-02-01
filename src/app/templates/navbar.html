@@ -1,10 +1,11 @@
-<template *ngIf="isLoggedIn">
+<nav *ngIf="isLoggedIn">
   <a routerLink="/">Home</a>
   <a routerLink="/tasks">Tasks</a>
   <a (click)="logout();" href="javascript:void(false);">Sign out</a>
-</template>
-<template *ngIf="!isLoggedIn">
+</nav>
+<nav *ngIf="!isLoggedIn">
   <a routerLink="/">Home</a>
   <a routerLink="/login">Sign in</a>
   <a routerLink="/registration">Sign up</a>
-</template>
+</nav>
+
