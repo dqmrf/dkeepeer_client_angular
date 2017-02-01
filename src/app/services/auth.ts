@@ -1,13 +1,16 @@
-import { Injectable, Inject }    from '@angular/core';
+import { Injectable, Inject, OnInit }    from '@angular/core';
 import { Http, Headers }         from '@angular/http';
 import { Router }                from '@angular/router';
 import { APP_CONFIG, AppConfig } from '../app.config';
+import { Subject }           from 'rxjs/Subject';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnInit {
   public accessToken: string;
+  public isLoggedIn: boolean = false;
+  public isLoggedInChange: Subject<boolean> = new Subject<boolean>();
   private tokenUrl: string;
   private headers = new Headers({'Content-Type': 'application/json'});
   
@@ -24,6 +27,8 @@ export class AuthService {
     return this.http.post(this.tokenUrl, body, {headers: this.headers}).subscribe(
       response => {
         this.setAccessToken(response.json().access_token);
+        this.isLoggedIn = true;
+        this.isLoggedInChange.next(this.isLoggedIn);
         this.router.navigate(['/tasks']);
       },
       error => {
@@ -34,14 +39,18 @@ export class AuthService {
 
   logout() {
     this.removeAccessToken();
+    this.isLoggedIn = false;
+    this.isLoggedInChange.next(this.isLoggedIn);
     this.router.navigate(['/login']);
   }
 
-  isLoggedIn() {
-    if(!localStorage.getItem('token')) {
-      return false;
+  isLoggedInCheck() {
+    if (localStorage.getItem('token')) {
+      this.isLoggedIn = true;
+      return true;
     }
-    return true;
+    this.isLoggedIn = false;
+    return false;
   }
 
   private setAccessToken(token: string) {
@@ -50,6 +59,10 @@ export class AuthService {
 
   private removeAccessToken() {
     localStorage.removeItem('token');
+  }
+
+  ngOnInit() {
+    this.isLoggedInCheck();
   }
 
   private handleError(error: any): Promise<any> {

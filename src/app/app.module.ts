@@ -19,6 +19,8 @@ import { RegistrationComponent }   from './components/registration';
 import { TasksComponent }          from './components/tasks';
 import { TaskListComponent }       from './components/tasks/list';
 
+import './rxjs-extensions';
+
 @NgModule({
   declarations: [
     AppComponent,
