@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService }       from '../services/auth';
+import { Component }   from '@angular/core';
+import { AuthService } from '../services/auth';
 
 @Component({
   moduleId: module.id,
@@ -7,7 +7,7 @@ import { AuthService }       from '../services/auth';
   templateUrl: '../templates/login.html'
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   user: {};
 
   constructor(private _authService: AuthService) {
@@ -17,6 +17,4 @@ export class LoginComponent implements OnInit {
   login() {
     this._authService.login(this.user);
   }
-
-  ngOnInit() {}
 }

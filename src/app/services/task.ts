@@ -1,29 +1,31 @@
-import { Injectable, OnInit }    from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import { Observable }    from 'rxjs/Observable';
-import { Observer }      from 'rxjs/Observer';
-import { Router }        from '@angular/router';
-import { AuthService }   from '../services/auth';
-import { Task }          from '../models/task';
+import { Injectable, Inject }    from '@angular/core';
+import { Http, Headers }         from '@angular/http';
+import { Observable }            from 'rxjs/Observable';
+import { Observer }              from 'rxjs/Observer';
+import { Router }                from '@angular/router';
+import { APP_CONFIG, AppConfig } from '../app.config';
+import { AuthService }           from '../services/auth';
+import { Task }                  from '../models/task';
 
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaskService {
-  private token;
-  private tasksUrl = "http://localhost:3000/api/tasks";
+  private tasksUrl;
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
     private http: Http,
     private router: Router,
-    private _authService: AuthService
-  ) {}
+    private _authService: AuthService,
+    @Inject(APP_CONFIG) config: AppConfig
+  ) {
+    this.tasksUrl = `${config.apiEndpoint}/tasks`;
+  }
 
   getTasks(): Promise<Task[]> {
-    let token = this._authService.getAccessToken();
-    return this.http.get(`${this.tasksUrl}?access_token=${token}`)
+    return this.http.get(`${this.tasksUrl}?access_token=${localStorage.getItem("token")}`)
       .toPromise()
       .then(res => res.json().tasks as Task[])
       .catch(this.handleError);

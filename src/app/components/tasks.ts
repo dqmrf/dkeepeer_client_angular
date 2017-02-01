@@ -7,6 +7,4 @@ import { TaskListComponent } from '../components/tasks/list';
   templateUrl: '../templates/tasks.html'
 })
 
-export class TasksComponent {
-  
-}
+export class TasksComponent {}

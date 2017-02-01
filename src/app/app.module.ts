@@ -1,5 +1,11 @@
 import { BrowserModule }           from '@angular/platform-browser';
 import { NgModule }                from '@angular/core';
+import { 
+  APP_CONFIG, 
+  CONFIG_PRODUCTION, 
+  CONFIG_DEVELOPMENT 
+}                                  from './app.config';
+import { environment }             from '../environments/environment';
 import { FormsModule }             from '@angular/forms';
 import { HttpModule }              from '@angular/http';
 import { AppRoutingModule }        from './app.routes';
@@ -31,7 +37,12 @@ import { TaskListComponent }       from './components/tasks/list';
   providers: [
     AuthService,
     TaskService,
-    AuthGuard
+    AuthGuard,
+    { provide: APP_CONFIG, 
+      useValue: environment.production 
+                ? CONFIG_PRODUCTION 
+                : CONFIG_DEVELOPMENT 
+    }
   ],
   bootstrap: [ AppComponent ]
 })
