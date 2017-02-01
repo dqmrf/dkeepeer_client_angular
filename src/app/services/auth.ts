@@ -1,14 +1,14 @@
-import { Injectable, Inject, OnInit } from '@angular/core';
-import { Http, Headers }              from '@angular/http';
-import { Router }                     from '@angular/router';
-import { Subject }                    from 'rxjs/Subject';
-import { APP_CONFIG, AppConfig }      from '../app.config';
+import { Injectable, Inject }    from '@angular/core';
+import { Http, Headers }         from '@angular/http';
+import { Router }                from '@angular/router';
+import { Subject }               from 'rxjs/Subject';
+import { APP_CONFIG, AppConfig } from '../app.config';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class AuthService implements OnInit {
+export class AuthService {
   public accessToken: string;
-  public isLoggedIn: boolean = false;
+  public isLoggedIn: boolean;
   public isLoggedInChange: Subject<boolean> = new Subject<boolean>();
 
   private tokenUrl: string;
@@ -42,14 +42,6 @@ export class AuthService implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  isLoggedInCheck() {
-    if (localStorage.getItem('token')) {
-      this.setLogIn(true);
-    } else {
-      this.setLogIn(false);
-    }
-  }
-
   private setAccessToken(token: string) {
     localStorage.setItem('token', token);
   }
@@ -66,9 +58,5 @@ export class AuthService implements OnInit {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred: ', error);
     return Promise.reject(error.message || error);
-  }
-
-  ngOnInit() {
-    this.isLoggedInCheck();
   }
 }

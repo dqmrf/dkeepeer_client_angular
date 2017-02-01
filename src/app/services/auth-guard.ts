@@ -7,6 +7,6 @@ export class AuthGuard implements CanActivate {
   constructor(private _authService: AuthService) {}
 
   canActivate() {
-    return this._authService.isLoggedIn;
+    return localStorage.getItem('token') ? true : false;
   }
 }

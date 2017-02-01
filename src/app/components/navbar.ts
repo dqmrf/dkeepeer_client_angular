@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth';
 })
 
 export class NavbarComponent implements OnDestroy {
-  public isLoggedIn: boolean = this._authService.isLoggedIn;
+  public isLoggedIn: boolean = localStorage.getItem('token') ? true : false;
   private _subscription;
 
   constructor(private _authService: AuthService) {
