@@ -2,12 +2,12 @@ import { BrowserModule }           from '@angular/platform-browser';
 import { NgModule }                from '@angular/core';
 import { 
   APP_CONFIG, 
-  CONFIG_PRODUCTION, 
-  CONFIG_DEVELOPMENT 
+  appConfig
 }                                  from './app.config';
 import { environment }             from '../environments/environment';
-import { FormsModule }             from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators  } from '@angular/forms';
 import { HttpModule }              from '@angular/http';
+import { NgbModule }               from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule }        from './app.routes';
 import { AuthService }             from './services/auth';
 import { TaskService }             from './services/task';
@@ -28,23 +28,22 @@ import './rxjs-extensions';
     RegistrationComponent,
     NavbarComponent,
     TasksComponent,
-    TaskListComponent
+    TaskListComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
   ],
   providers: [
     AuthService,
     TaskService,
     AuthGuard,
-    { provide: APP_CONFIG, 
-      useValue: environment.production 
-                ? CONFIG_PRODUCTION 
-                : CONFIG_DEVELOPMENT 
-    }
+    FormBuilder,
+    Validators,
+    { provide: APP_CONFIG, useFactory: appConfig }
   ],
   bootstrap: [ AppComponent ]
 })

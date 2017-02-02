@@ -1,10 +1,28 @@
-<nav *ngIf="isLoggedIn">
-  <a routerLink="/">Home</a>
-  <a routerLink="/tasks">Tasks</a>
-  <a (click)="logout();" href="javascript:void(false);">Sign out</a>
-</nav>
-<nav *ngIf="!isLoggedIn">
-  <a routerLink="/">Home</a>
-  <a routerLink="/login">Sign in</a>
-  <a routerLink="/registration">Sign up</a>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul *ngIf="isLoggedIn" class="nav navbar-nav">
+      <!-- Logged in -->
+      <li class="nav-item">
+        <a routerLink="/" class="nav-link">Home</a>
+      </li>
+      <li>
+        <a routerLink="/tasks" class="nav-link">Tasks</a>
+      </li>
+      <li>
+        <a (click)="logout();" href="javascript:void(false);" class="nav-link">Sign out</a>
+      </li>
+    </ul>
+    <ul *ngIf="!isLoggedIn" class="nav navbar-nav">
+      <!-- Logged out -->
+      <li class="nav-item">
+        <a routerLink="/" class="nav-link">Home</a>
+      </li>
+      <li>
+        <a routerLink="/login" class="nav-link">Sign in</a>
+      </li>
+      <li>
+        <a routerLink="/registration" class="nav-link">Sign up</a>
+      </li>
+    </ul>
+  </div>
 </nav>
