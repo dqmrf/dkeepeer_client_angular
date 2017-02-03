@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+/* Notifications */
+app-root .simple-notification .sn-title,
+app-root .simple-notification .sn-content {
+  padding: 0 30px 0 0;
+}
+app-root .simple-notification .sn-progress-loader {
+  height: 3px;
+}
+app-root .simple-notification svg {
+  width: 28px;
+  height: 28px;
+  margin: 6px;
+  padding: 0px;
+}

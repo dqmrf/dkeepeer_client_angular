@@ -3,6 +3,7 @@ import { Http, Headers }         from '@angular/http';
 import { Router }                from '@angular/router';
 import { Subject }               from 'rxjs/Subject';
 import { APP_CONFIG, AppConfig } from '../app.config';
+import { NotificationsService }  from 'angular2-notifications';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -19,6 +20,8 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
+    private _service: NotificationsService,
+    private _flash: NotificationsService,
     @Inject(APP_CONFIG) config: AppConfig
   ) {
     this.baseUrl = config.serverUrl;
@@ -33,6 +36,7 @@ export class AuthService {
           this.setAccessToken(response.json().access_token);
           this.setLogIn(true);
           this.router.navigate(['/admin']);
+          this._flash.success('', 'Signed in successfully!');
         }
       },
       error => {
@@ -45,6 +49,7 @@ export class AuthService {
     this.removeAccessToken();
     this.setLogIn(false);
     this.router.navigate(['/login']);
+    this._flash.success('', 'Signed out successfully!');
   }
 
   registration(user) {
@@ -53,6 +58,8 @@ export class AuthService {
       response => {
         if (response.status == 200) {
           this.router.navigate(['/login']);
+          this._flash.success('', 'Registration successfully!');
+          this._flash.alert('', 'Please sign in!');
         }
       },
       error => {

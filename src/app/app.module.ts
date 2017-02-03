@@ -20,6 +20,7 @@ import { RegistrationComponent }   from './components/registration';
 import { AdminComponent }          from './components/admin';
 import { TasksComponent }          from './components/tasks';
 import { TaskListComponent }       from './components/tasks/list';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import './rxjs-extensions';
 
 @NgModule({
@@ -30,13 +31,14 @@ import './rxjs-extensions';
     NavbarComponent,
     AdminComponent,
     TasksComponent,
-    TaskListComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRoutingModule/*,
+    AppRoutingModule,
+    SimpleNotificationsModule/*,
     NgbModule.forRoot()*/
   ],
   providers: [
