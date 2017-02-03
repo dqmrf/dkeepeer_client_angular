@@ -13,7 +13,6 @@ import { APP_CONFIG, appConfig }   from './app.config';
 import { AppRoutingModule }        from './app.routes';
 import { AuthService }             from './services/auth';
 import { TaskService }             from './services/task';
-import { AuthGuard }               from './services/auth-guard';
 import { AppComponent }            from './components/app';
 import { LoginComponent }          from './components/login';
 import { NavbarComponent }         from './components/navbar';
@@ -43,7 +42,6 @@ import './rxjs-extensions';
   providers: [
     AuthService,
     TaskService,
-    AuthGuard,
     FormBuilder,
     Validators,
     { provide: APP_CONFIG, useFactory: appConfig }

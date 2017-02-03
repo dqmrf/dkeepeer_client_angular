@@ -5,7 +5,8 @@ import { RegistrationComponent } from './components/registration';
 import { AdminComponent }        from './components/admin';
 import { TasksComponent }        from './components/tasks';
 import { PageNotFoundComponent } from './components/errors/404';
-import { AuthGuard }             from './services/auth-guard';
+import { SignedInGuard }         from './guards/signed-in';
+import { SignedOutGuard }        from './guards/signed-out';
 
 const routes: Routes = [
   {
@@ -15,20 +16,22 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    canActivate: [ SignedInGuard ],
     component: LoginComponent
   },
   {
     path: 'registration',
+    canActivate: [ SignedInGuard ],
     component: RegistrationComponent
   },
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [ AuthGuard ],
+    canActivate: [ SignedOutGuard ],
     children: [
       {
         path: '',
-        canActivateChild: [ AuthGuard ],
+        canActivateChild: [ SignedOutGuard ],
         children: [
           {
             path: 'tasks',
@@ -51,6 +54,7 @@ const routes: Routes = [
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ],
+  providers: [ SignedInGuard, SignedOutGuard ],
   declarations: [ PageNotFoundComponent ]
 })
 
