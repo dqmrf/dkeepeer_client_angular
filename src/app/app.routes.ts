@@ -1,11 +1,9 @@
 import { NgModule }              from '@angular/core';
-import { 
-  Routes, 
-  RouterModule
-}                                from '@angular/router';
+import { Routes, RouterModule }  from '@angular/router';
 import { LoginComponent }        from './components/login';
 import { RegistrationComponent } from './components/registration';
 import { TasksComponent }        from './components/tasks';
+import { PageNotFoundComponent } from './components/errors/404';
 import { AuthGuard }             from './services/auth-guard';
 
 const routes: Routes = [
@@ -29,13 +27,14 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'login'
+    component: PageNotFoundComponent
   }
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  exports: [ RouterModule ],
+  declarations: [ PageNotFoundComponent ]
 })
 
 export class AppRoutingModule {}
