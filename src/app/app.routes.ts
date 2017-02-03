@@ -9,7 +9,7 @@ import { AuthGuard }             from './services/auth-guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'tasks',
     pathMatch: 'full'
   },
   {
