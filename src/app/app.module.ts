@@ -18,6 +18,7 @@ import { AppComponent }            from './components/app';
 import { LoginComponent }          from './components/login';
 import { NavbarComponent }         from './components/navbar';
 import { RegistrationComponent }   from './components/registration';
+import { AdminComponent }          from './components/admin';
 import { TasksComponent }          from './components/tasks';
 import { TaskListComponent }       from './components/tasks/list';
 import './rxjs-extensions';
@@ -28,6 +29,7 @@ import './rxjs-extensions';
     LoginComponent,
     RegistrationComponent,
     NavbarComponent,
+    AdminComponent,
     TasksComponent,
     TaskListComponent,
   ],

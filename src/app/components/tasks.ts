@@ -1,4 +1,3 @@
-import { Injectable }        from '@angular/core';
 import { Component }         from '@angular/core';
 import { TaskListComponent } from '../components/tasks/list';
 
