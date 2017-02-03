@@ -25,10 +25,12 @@ export class LoginComponent {
   }
 
   isValid(field: string, rule: string): boolean {
-    if (this.loginForm.controls[field].hasError(rule)
-      && this.loginForm.controls[field].touched) {
-      return false;
-    }
-    return true;
+    let field_ = this.loginForm.controls[field];
+    return (field_.hasError(rule) && field_.touched) ? false : true;
+  }
+
+  isValidCompletely(field: string): boolean {
+    let field_ = this.loginForm.controls[field];
+    return (!field_.valid && field_.touched) ? false : true;
   }
 }

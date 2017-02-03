@@ -1,24 +1,32 @@
-<!-- <div class="row">
-  <form [formGroup]="registerForm" (ngSubmit)="registration()" class="form-signin" >
-    Title
+<div class="row">
+  <form [formGroup]="registerForm" (ngSubmit)="registration()" class="form-signin col-md-offset-3 col-md-6">
+    <!-- Title -->
     <h2 class="form-signin-heading">Please Sign up</h2>
-    Email
-    <div class="form-group">
-      <label for="inputEmail">Email address</label>
-      <input ngControl="email" id="inputEmail" name="email" type="email" class="form-control" placeholder="Email">
+    <!-- Email -->
+    <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('email')}">
+      <label for="inputEmail" class="control-label">Email address</label>
+      <input formControlName="email" type="email" 
+        class="form-control" id="inputEmail" placeholder="Email">
+        <div *ngIf="!isValid('email', 'required')" class="help-block">* Email is required!</div>
     </div>
-    Password
-    <div class="form-group">
-      <label for="inputPassword">Password</label>
-      <input ngControl="password" id="inputPassword" name="password" type="password" class="form-control" placeholder="Password">
+    <!-- Password -->
+    <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('password')}">
+      <label for="inputPassword" class="control-label">Password</label>
+      <input formControlName="password" type="password"
+        class="form-control" id="inputPassword" placeholder="Password">
+      <div *ngIf="!isValid('password', 'required')" class="help-block">* Password is required!</div>
+      <div *ngIf="!isValid('password', 'minlength')" class="help-block">* Minimum password length is 6!</div>
     </div>
-    Password confirmation
-    <div class="form-group">
-      <label for="inputPasswordConfirmation">Password confirmation</label>
-      <input ngControl="password_confirmation" id="inputPasswordConfirmation" name="password_confirmation" type="password" class="form-control" placeholder="Password Confirmation">
+    <!-- Password confirmation -->
+    <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('password_confirmation')}">
+      <label for="inputPasswordConfirmation" class="control-label">Password confirmation</label>
+      <input formControlName="password_confirmation" type="password"
+        id="inputPasswordConfirmation" class="form-control" placeholder="Password Confirmation">
+      <div *ngIf="!isValid('password_confirmation', 'required')" class="help-block">* Confirm Password is required!</div>
+      <div *ngIf="!isValid('password_confirmation', 'notEquivalent')" class="help-block">* Passwords don't match!</div>
     </div>
-    Actions
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
-    <a class="btn btn-lg btn-info btn-block" routerLink='/login'>Login</a>
+    <!-- Actions -->
+    <button [disabled]="!registerForm.valid" class="btn btn-primary" type="submit">Sign up</button>
+    <a class="btn btn-info" routerLink='/login'>Login</a>
   </form>
-</div> -->
+</div>

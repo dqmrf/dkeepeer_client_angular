@@ -3,16 +3,14 @@
     <!-- Title -->
     <h3 class="form-signin-heading">Please Login</h3>
     <!-- Email -->
-    <div class="form-group" [ngClass]="{'has-error': !isValid('email', 'required')}">
+    <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('email')}">
       <label for="inputEmail" class="control-label">Email address</label>
       <input formControlName="email" type="email" 
         class="form-control" id="inputEmail" placeholder="Email">
         <div *ngIf="!isValid('email', 'required')" class="help-block">* Email is required!</div>
     </div>
     <!-- Password -->
-    <div class="form-group" [ngClass]="{
-      'has-error': !isValid('password', 'required') || !isValid('password', 'minlength')
-    }">
+    <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('password')}">
       <label for="inputPassword" class="control-label">Password</label>
       <input formControlName="password" type="password"
         class="form-control" id="inputPassword" placeholder="Password">

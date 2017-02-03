@@ -29,17 +29,19 @@ export class RegistrationComponent {
     return (group: FormGroup) => {
       let passwordInput = group.controls[passwordKey];
       let passwordConfirmationInput = group.controls[passwordConfirmationKey];
-      if (passwordInput.value !== passwordConfirmationInput.value) {
+      if (passwordInput.value != passwordConfirmationInput.value) {
         return passwordConfirmationInput.setErrors({notEquivalent: true});
       }
     };
   }
 
   isValid(field: string, rule: string): boolean {
-    if (this.registerForm.controls[field].hasError(rule)
-      && this.registerForm.controls[field].touched) {
-      return false;
-    }
-    return true;
+    let field_ = this.registerForm.controls[field];
+    return (field_.hasError(rule) && field_.touched) ? false : true;
+  }
+
+  isValidCompletely(field: string): boolean {
+    let field_ = this.registerForm.controls[field];
+    return (!field_.valid && field_.touched) ? false : true;
   }
 }
