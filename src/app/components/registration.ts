@@ -22,14 +22,14 @@ export class RegistrationComponent {
   }
 
   registration() {
-    // this._authService.registration(this.registerForm.value);
+    this._authService.registration(this.registerForm.value);
   }
 
   matchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
     return (group: FormGroup) => {
       let passwordInput = group.controls[passwordKey];
       let passwordConfirmationInput = group.controls[passwordConfirmationKey];
-      if (passwordInput.value != passwordConfirmationInput.value) {
+      if (passwordInput.value !== passwordConfirmationInput.value) {
         return passwordConfirmationInput.setErrors({notEquivalent: true});
       }
     };

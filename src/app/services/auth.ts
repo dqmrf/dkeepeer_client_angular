@@ -12,6 +12,7 @@ export class AuthService {
   public isLoggedInChange: Subject<boolean> = new Subject<boolean>();
 
   private tokenUrl: string;
+  private baseUrl: string;
   private headers = new Headers({'Content-Type': 'application/json'});
   
   constructor(
@@ -19,6 +20,7 @@ export class AuthService {
     private router: Router,
     @Inject(APP_CONFIG) config: AppConfig
   ) {
+    this.baseUrl = config.serverUrl;
     this.tokenUrl = `${config.serverUrl}/oauth/token?client_id=${config.clientId}&grant_type=password`;
   }
 
@@ -26,9 +28,11 @@ export class AuthService {
     let body = JSON.stringify(user);
     return this.http.post(this.tokenUrl, body, {headers: this.headers}).subscribe(
       response => {
-        this.setAccessToken(response.json().access_token);
-        this.setLogIn(true);
-        this.router.navigate(['/tasks']);
+        if (response.status == 200) {
+          this.setAccessToken(response.json().access_token);
+          this.setLogIn(true);
+          this.router.navigate(['/tasks']);
+        }
       },
       error => {
         console.log(error.text());
@@ -40,6 +44,20 @@ export class AuthService {
     this.removeAccessToken();
     this.setLogIn(false);
     this.router.navigate(['/login']);
+  }
+
+  registration(user) {
+    let body = JSON.stringify({user: user});
+    this.http.post(`${this.baseUrl}/api/users`, body, { headers: this.headers }).subscribe(
+      response => {
+        if (response.status == 200) {
+          this.router.navigate(['/login']);
+        }
+      },
+      error => {
+        console.log(error.text());
+      }
+    );
   }
 
   private setAccessToken(token: string) {
