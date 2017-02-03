@@ -10,6 +10,7 @@ export class AuthService {
   public accessToken: string;
   public isLoggedIn: boolean;
   public isLoggedInChange: Subject<boolean> = new Subject<boolean>();
+  public redirectUrl: string;
 
   private tokenUrl: string;
   private baseUrl: string;
@@ -31,7 +32,7 @@ export class AuthService {
         if (response.status == 200) {
           this.setAccessToken(response.json().access_token);
           this.setLogIn(true);
-          this.router.navigate(['/tasks']);
+          this.router.navigate(['/admin']);
         }
       },
       error => {
