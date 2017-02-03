@@ -20,7 +20,6 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
-    private _service: NotificationsService,
     private _flash: NotificationsService,
     @Inject(APP_CONFIG) config: AppConfig
   ) {
