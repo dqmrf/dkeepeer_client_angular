@@ -4,18 +4,17 @@ import { Router }                from '@angular/router';
 import { Subject }               from 'rxjs/Subject';
 import { APP_CONFIG, AppConfig } from '../app.config';
 import { NotificationsService }  from 'angular2-notifications';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
   public accessToken: string;
-  public isLoggedIn: boolean;
-  public isLoggedInChange: Subject<boolean> = new Subject<boolean>();
+  public isLoggedIn: Subject<boolean> = new Subject<boolean>();
   public redirectUrl: string;
 
   private tokenUrl: string;
   private baseUrl: string;
   private headers = new Headers({'Content-Type': 'application/json'});
+  private _isLoggedIn: boolean;
   
   constructor(
     private http: Http,
@@ -29,19 +28,17 @@ export class AuthService {
 
   login(user) {
     let body = JSON.stringify(user);
-    return this.http.post(this.tokenUrl, body, {headers: this.headers}).subscribe(
-      response => {
-        if (response.status == 200) {
-          this.setAccessToken(response.json().access_token);
+    return this.http.post(this.tokenUrl, body, {headers: this.headers})
+      .subscribe(res => {
+        if (res.status == 200) {
+          this.setAccessToken(res.json().access_token);
           this.setLogIn(true);
           this.router.navigate(['/admin']);
           this._flash.success('', 'Signed in successfully!');
         }
-      },
-      error => {
-        console.log(error.text());
-      }
-    );
+      }, error => {
+        this.handleError(error.text(), 'Login failed!')
+      });
   }
 
   logout() {
@@ -52,19 +49,18 @@ export class AuthService {
   }
 
   registration(user) {
+    const url = `${this.baseUrl}/api/users`;
     let body = JSON.stringify({user: user});
-    this.http.post(`${this.baseUrl}/api/users`, body, { headers: this.headers }).subscribe(
-      response => {
-        if (response.status == 200) {
+    this.http.post(url, body, { headers: this.headers })
+      .subscribe(res => {
+        if (res.status == 200) {
           this.router.navigate(['/login']);
           this._flash.success('', 'Registration successfully!');
           this._flash.alert('', 'Please sign in!');
         }
-      },
-      error => {
-        console.log(error.text());
-      }
-    );
+      }, error => {
+        this.handleError(error.text(), 'Registration failed!')
+      });
   }
 
   private setAccessToken(token: string) {
@@ -72,16 +68,17 @@ export class AuthService {
   }
 
   private setLogIn(value: boolean) {
-    this.isLoggedIn = value;
-    this.isLoggedInChange.next(this.isLoggedIn);
+    this._isLoggedIn = value;
+    this.isLoggedIn.next(this._isLoggedIn);
   }
 
   private removeAccessToken() {
     localStorage.removeItem('token');
   }
 
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred: ', error);
+  private handleError(error: any, flash: any = null): Promise<any> {
+    console.error(error);
+    flash ? this._flash.error('', flash) : null;
     return Promise.reject(error.message || error);
   }
 }

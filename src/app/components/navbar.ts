@@ -1,6 +1,6 @@
 import { Component, OnDestroy }   from '@angular/core';
-import { AuthService } from '../services/auth';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AuthService }            from '../services/auth';
+import { NgbModule }              from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   moduleId: module.id,
@@ -10,10 +10,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 export class NavbarComponent implements OnDestroy {
   public isLoggedIn: boolean = localStorage.getItem('token') ? true : false;
-  private _subscription;
+  private _isLoggedInSubscription;
 
   constructor(private _authService: AuthService) {
-    this._subscription = _authService.isLoggedInChange.subscribe((value) => { 
+    this._isLoggedInSubscription = _authService.isLoggedIn.subscribe((value) => { 
       this.isLoggedIn = value; 
     });
   }
@@ -23,6 +23,6 @@ export class NavbarComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this._subscription.unsubscribe();
+    this._isLoggedInSubscription.unsubscribe();
   }
 }

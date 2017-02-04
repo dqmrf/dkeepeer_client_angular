@@ -1,0 +1,11 @@
+<form [formGroup]="createTaskForm" (ngSubmit)="createTask()" class="site-form">
+  <!-- Title -->
+  <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('title')}">
+    <label for="inputTitle" class="control-label">Title</label>
+    <input formControlName="title" type="text" 
+      class="form-control" id="inputTitle" placeholder="Title">
+      <div *ngIf="!isValid('title', 'required')" class="help-block">* Title is required!</div>
+  </div>
+  <!-- Actions -->
+  <button [disabled]="!createTaskForm.valid" type="submit" class="btn btn-success">Create Task</button>
+</form>

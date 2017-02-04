@@ -4,6 +4,7 @@ import { LoginComponent }        from './components/login';
 import { RegistrationComponent } from './components/registration';
 import { AdminComponent }        from './components/admin';
 import { TasksComponent }        from './components/tasks';
+import { TasksDetailComponent }  from './components/tasks/detail';
 import { PageNotFoundComponent } from './components/errors/404';
 import { SignedInGuard }         from './guards/signed-in';
 import { SignedOutGuard }        from './guards/signed-out';
@@ -36,6 +37,10 @@ const routes: Routes = [
           {
             path: 'tasks',
             component: TasksComponent
+          },
+          { 
+            path: 'tasks/:id', 
+            component: TasksDetailComponent 
           },
           {
             path: '',

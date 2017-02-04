@@ -1,5 +1,4 @@
 import { Component }         from '@angular/core';
-import { TaskListComponent } from '../components/tasks/list';
 
 @Component({
   moduleId: module.id,

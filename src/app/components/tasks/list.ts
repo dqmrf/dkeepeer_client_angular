@@ -1,31 +1,28 @@
-import { Component, OnInit }  from '@angular/core';
-import { Router }             from '@angular/router';
-import { Observable }         from 'rxjs/Observable';
-import { TaskService }        from '../../services/task';
-import { Task }               from '../../models/task';
+import { Component, OnDestroy } from '@angular/core';
+import { TaskService }          from '../../services/task';
+import { Task }                 from '../../models/task';
 
 @Component({
-  selector: 'task-list',
-  // pipes: [ByFieldPipe], // => this i will have to understand
   moduleId: module.id,
+  selector: 'tasks-list',
+  // pipes: [ByFieldPipe], // => this i will have to understand
   templateUrl: '../../templates/tasks/list.html'
 })
 
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnDestroy {
   tasks: Task[];
+  private _tasksSubscription;
 
   constructor(
-    private router: Router,
     private _taskService: TaskService
-  ) {}
-
-  getTasks(): void {
-    this._taskService.getTasks().then(tasks => {
-      this.tasks = tasks
+  ) {
+    this._tasksSubscription = _taskService.tasks.subscribe((value) => { 
+      this.tasks = value;
     });
+    this._taskService.loadTasks();
   }
 
-  ngOnInit(): void {
-    this.getTasks();
+  ngOnDestroy() {
+    this._tasksSubscription.unsubscribe();
   }
 }
