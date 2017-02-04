@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 export class TaskService {
   public tasks: Subject<Task[]>;
 
-  private _tasks: Task[];
+  _tasks: Task[];
   private tasksUrl: string;
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -46,18 +46,14 @@ export class TaskService {
       .catch(error => this.handleError(error, 'Could not load task!'));
   }
 
-  create(task) {
+  create(task): Promise<Task> {
     let body = JSON.stringify({task: task});
     const url = `${this.tasksUrl}?access_token=${localStorage.getItem("token")}`;
     return this.http.post(url, body, { headers: this.headers })
-      .map(res => res.json())
-      .subscribe(data => {
-        this._tasks.unshift(data);
-        this.tasks.next(this._tasks);
-        return true;
-      }, error => {
-        this.handleError(error, 'Could not create task!');
-        return false;
+      .toPromise()
+      .then(res => res.json() as Task)
+      .catch(error => {
+        this.handleError(error, 'Could not create task!')
       });
   }
 
