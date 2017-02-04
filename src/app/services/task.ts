@@ -54,8 +54,10 @@ export class TaskService {
       .subscribe(data => {
         this._tasks.unshift(data);
         this.tasks.next(this._tasks);
+        return true;
       }, error => {
         this.handleError(error, 'Could not create task!');
+        return false;
       });
   }
 

@@ -25,6 +25,7 @@ export class TaskFormComponent {
 
   createTask() {
     this._taskService.create(this.createTaskForm.value);
+    this.createTaskForm.reset();
   }
 
   isValid(field: string, rule: string): boolean {
