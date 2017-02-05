@@ -1,6 +1,4 @@
-import { Component }            from '@angular/core';
-import { Http }                 from '@angular/http';
-import { NotificationsService } from 'angular2-notifications';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

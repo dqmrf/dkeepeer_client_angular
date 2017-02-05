@@ -9,8 +9,6 @@ import {
   Validators }         from '@angular/forms';
 import { TaskService } from '../../services/task';
 import { Task }        from '../../models/task';
-import { Subject }     from 'rxjs/Subject';
-import 'rxjs/add/operator/toPromise';
 
 @Component({
   moduleId: module.id,

@@ -1,7 +1,6 @@
 import { Component, OnInit }      from '@angular/core';
 import { Location }               from '@angular/common';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Observable }             from 'rxjs/Observable';
 import { TaskService }            from '../../services/task';
 import { Task }                   from '../../models/task';
 import 'rxjs/add/operator/switchMap';

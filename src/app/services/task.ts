@@ -4,8 +4,6 @@ import { NotificationsService }  from 'angular2-notifications';
 import { APP_CONFIG, AppConfig } from '../app.config';
 import { Task }                  from '../models/task';
 import { Subject }               from 'rxjs/Subject';
-import { Observable }            from 'rxjs/Observable';
-import { Observer }              from 'rxjs/Observer';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
