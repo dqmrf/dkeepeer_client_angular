@@ -13,7 +13,8 @@ export class NavbarComponent implements OnDestroy {
   private _isLoggedInSubscription;
 
   constructor(private _authService: AuthService) {
-    this._isLoggedInSubscription = _authService.isLoggedIn.subscribe((value) => { 
+    this._isLoggedInSubscription = _authService.isLoggedIn.subscribe((value) => {
+      if (value == undefined) return; 
       this.isLoggedIn = value; 
     });
   }

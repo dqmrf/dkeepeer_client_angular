@@ -9,6 +9,7 @@ import {
   Validators }         from '@angular/forms';
 import { TaskService } from '../../services/task';
 import { Task }        from '../../models/task';
+import { Subject }     from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
 
 @Component({
@@ -19,7 +20,7 @@ import 'rxjs/add/operator/toPromise';
 
 export class TaskFormComponent implements OnDestroy {
   createTaskForm: FormGroup;
-  tasks: Task[];
+  tasks: Task[] = [];
 
   private _tasksSubscription;
 
@@ -31,13 +32,14 @@ export class TaskFormComponent implements OnDestroy {
       title: ['', Validators.required]
     });
     this._tasksSubscription = _taskService.tasks.subscribe((value) => { 
+      if (value == undefined) return;
       this.tasks = value;
     });
   }
 
   createTask() {
     this._taskService.create(this.createTaskForm.value)
-    .then(data => { 
+    .then(data => {
       this.tasks.unshift(data);
       this._taskService.tasks.next(this.tasks);
       this.createTaskForm.reset();

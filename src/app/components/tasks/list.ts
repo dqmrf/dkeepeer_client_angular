@@ -17,6 +17,7 @@ export class TaskListComponent implements OnDestroy {
     private _taskService: TaskService
   ) {
     this._tasksSubscription = _taskService.tasks.subscribe((value) => { 
+      if (value == undefined) return;
       this.tasks = value;
     });
     this._taskService.loadTasks();

@@ -13,7 +13,7 @@ import 'rxjs/add/operator/map';
 export class TaskService {
   public tasks: Subject<Task[]>;
 
-  _tasks: Task[];
+  private _tasks: Task[];
   private tasksUrl: string;
   private headers = new Headers({'Content-Type': 'application/json'});
 

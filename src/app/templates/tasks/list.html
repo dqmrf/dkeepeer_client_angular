@@ -1,5 +1,4 @@
-<h4>Tasks list</h4>
-<ul class="list-group">
+<ul *ngIf="tasks" class="list-group">
   <li class="list-group-item" *ngFor="let task of tasks">
     <span class="task-id">{{task.id}}</span>
     <a [routerLink]="['/admin/tasks', task.id]">
@@ -7,3 +6,6 @@
     </a>
   </li>
 </ul>
+<div *ngIf="!tasks">
+  <h4>There are no tasks yet!</h4>
+</div>
