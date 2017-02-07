@@ -25,10 +25,15 @@ export class TasksDetailComponent implements OnInit {
       .subscribe(task => {this.task = task;})
   }
 
-  // save() {
-  //   this._taskService.update(this.task)
-  //     .then(() => this.goBack());
-  // }
+  onUpdate(res) {
+    this.task[res.field] = res.value;
+    this.save();
+  }
+
+  save() {
+    this._taskService.update(this.task)
+      // .then(() => this.goBack());
+  }
 
   goBack() {
     this.location.back();

@@ -55,6 +55,16 @@ export class TaskService {
       });
   }
 
+  update(task) {
+    const url = `${this.tasksUrl}/${task.id}?access_token=${localStorage.getItem("token")}`;
+    this.http.put(url,  JSON.stringify(task), { headers: this.headers })
+      .toPromise()
+      .then(res => res.json() as Task)
+      .catch(error => {
+        this.handleError(error, 'Could not update task!')
+      });
+  }
+
   private handleError(error: any, flash: any = null): Promise<any> {
     console.error(error);
     flash ? this._flash.error('', flash) : null;

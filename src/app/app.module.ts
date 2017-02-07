@@ -2,6 +2,7 @@ import { BrowserModule }             from '@angular/platform-browser';
 import { NgModule }                  from '@angular/core';
 import {
   ReactiveFormsModule, 
+  FormsModule,
   FormBuilder, 
   FormGroup, 
   Validators  
@@ -16,6 +17,7 @@ import { TaskService }               from './services/task';
 import { AppComponent }              from './components/app';
 import { LoginComponent }            from './components/login';
 import { NavbarComponent }           from './components/navbar';
+import { InlineEditComponent }       from './components/inline-edit';
 import { RegistrationComponent }     from './components/registration';
 import { AdminComponent }            from './components/admin';
 import { TasksComponent }            from './components/tasks';
@@ -35,11 +37,13 @@ import './rxjs-extensions';
     TasksComponent,
     TaskListComponent,
     TaskFormComponent,
-    TasksDetailComponent
+    TasksDetailComponent,
+    InlineEditComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpModule,
     AppRoutingModule,
     SimpleNotificationsModule/*,
