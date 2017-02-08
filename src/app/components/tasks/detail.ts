@@ -22,7 +22,9 @@ export class TasksDetailComponent implements OnInit {
   getTask() {
     this.route.params
       .switchMap((params: Params) => this._taskService.getTask(+params['id']))
-      .subscribe(task => {this.task = task;})
+      .subscribe(task => {
+        this.task = task;
+      });
   }
 
   onUpdate(res) {
@@ -31,7 +33,7 @@ export class TasksDetailComponent implements OnInit {
   }
 
   save() {
-    this._taskService.update(this.task)
+    this._taskService.update(this.task);
       // .then(() => this.goBack());
   }
 

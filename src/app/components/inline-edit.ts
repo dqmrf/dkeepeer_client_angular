@@ -26,10 +26,7 @@ const INLINE_EDIT_CONTROL_VALUE_ACCESSOR = {
 
 export class InlineEditComponent implements ControlValueAccessor {
   @ViewChild('inlineEditControl') inlineEditControl;
-  @Input() label: string = '';
-  @Input() type: string = 'text';
   @Input() field: string = '';
-  @Input() required: boolean = false;
   @Input() disabled: boolean = false;
   @Output() update: EventEmitter<Object> = new EventEmitter<Object>();
 
@@ -78,12 +75,13 @@ export class InlineEditComponent implements ControlValueAccessor {
   }
 
   edit(value) {
-    if (this.disabled) {return}
+    if (this.disabled) return;
     this.preValue = value;
     this.editing = true;
-    setTimeout(_ => this._renderer.invokeElementMethod(
-      this.inlineEditControl.nativeElement,
+    setTimeout(_ => {
+      this._renderer.invokeElementMethod(
+        this.inlineEditControl.nativeElement,
       'focus', [])
-    );
+    });
   }
 }

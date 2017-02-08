@@ -6,7 +6,7 @@
       [name]="value" [(ngModel)]="value" [type]="type" [placeholder]="label" />
   </div>
   <div *ngIf="!editing">
-    <div title="Click to edit" (click)="edit(value);" (focus)="edit(value);" 
+    <div title="Click to edit" (click)="edit(value);" 
       tabindex="0" class="inline-edit">{{value}}&nbsp;</div>
   </div>
 </div>
