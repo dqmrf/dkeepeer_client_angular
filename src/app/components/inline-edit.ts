@@ -6,8 +6,7 @@ import {
   ElementRef,
   ViewChild,
   Renderer,
-  forwardRef,
-  OnInit }              from '@angular/core';
+  forwardRef }          from '@angular/core';
 import { 
   ControlValueAccessor, 
   NG_VALUE_ACCESSOR }   from '@angular/forms';
@@ -25,7 +24,7 @@ const INLINE_EDIT_CONTROL_VALUE_ACCESSOR = {
   styleUrls: ['../../assets/styles/inline-edit.component.css']
 })
 
-export class InlineEditComponent implements ControlValueAccessor, OnInit {
+export class InlineEditComponent implements ControlValueAccessor {
   @ViewChild('inlineEditControl') inlineEditControl;
   @Input() label: string = '';
   @Input() type: string = 'text';
@@ -87,6 +86,4 @@ export class InlineEditComponent implements ControlValueAccessor, OnInit {
       'focus', [])
     );
   }
-
-  ngOnInit() {}
 }
