@@ -12,3 +12,8 @@ app-root .simple-notification svg {
   margin: 6px;
   padding: 0px;
 }
+
+/* Datepicker */
+app-root .mydp .inlinedp {
+  width: 100%;
+}

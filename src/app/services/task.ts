@@ -45,6 +45,7 @@ export class TaskService {
   }
 
   create(task): Promise<Task> {
+    task['due_date'] = task['due_date']['formatted'];
     let body = JSON.stringify({task: task});
     const url = `${this.tasksUrl}?access_token=${localStorage.getItem("token")}`;
     return this.http.post(url, body, { headers: this.headers })

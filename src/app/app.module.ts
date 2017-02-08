@@ -8,7 +8,6 @@ import {
   Validators  
 }                                    from '@angular/forms';
 import { HttpModule }                from '@angular/http';
-// import { NgbModule }                 from '@ng-bootstrap/ng-bootstrap';
 import { environment }               from '../environments/environment';
 import { APP_CONFIG, appConfig }     from './app.config';
 import { AppRoutingModule }          from './app.routes';
@@ -25,6 +24,8 @@ import { TaskListComponent }         from './components/tasks/list';
 import { TaskFormComponent }         from './components/tasks/form';
 import { TasksDetailComponent }      from './components/tasks/detail';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { MyDatePickerModule }        from 'mydatepicker';
+// import { NgbModule }                 from '@ng-bootstrap/ng-bootstrap';
 import './rxjs-extensions';
 
 @NgModule({
@@ -46,7 +47,8 @@ import './rxjs-extensions';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    SimpleNotificationsModule/*,
+    SimpleNotificationsModule,
+    MyDatePickerModule/*,
     NgbModule.forRoot()*/
   ],
   providers: [

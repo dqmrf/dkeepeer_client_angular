@@ -15,7 +15,10 @@ export class LoginComponent {
     @Inject(FormBuilder) fb: FormBuilder
   ) {
     this.loginForm = fb.group({
-      email: ['', Validators.required],
+      email: ['', Validators.compose([
+        Validators.required, 
+        Validators.pattern("^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$")
+      ])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     });
   }

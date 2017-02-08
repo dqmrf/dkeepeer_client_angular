@@ -6,6 +6,29 @@
       class="form-control" id="inputTitle" placeholder="Title">
       <div *ngIf="!isValid('title', 'required')" class="help-block">* Title is required!</div>
   </div>
+  <!-- Description -->
+  <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('description')}">
+    <label for="inputDescription" class="control-label">Description</label>
+    <textarea formControlName="description" type="text" 
+      class="form-control" id="inputDescription" placeholder="Description" rows="4"></textarea>
+      <div *ngIf="!isValid('description', 'required')" class="help-block">* Description is required!</div>
+  </div>
+  <!-- Priority -->
+  <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('priority')}">
+    <label for="inputPriority" class="control-label">Priority</label>
+    <input formControlName="priority" type="number" 
+      class="form-control" id="inputPrioritye" placeholder="Priority">
+      <div *ngIf="!isValid('priority', 'required')" class="help-block">* Priority is required!</div>
+      <div *ngIf="!isValid('priority', 'maxlength')" class="help-block">* Maximum priority length is 6!</div>
+      <div *ngIf="!isValid('priority', 'pattern')" class="help-block">* Priority must be integer!</div>
+  </div>
+  <!-- Due Date -->
+  <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('due_date')}">
+    <label for="inputDueDate" class="control-label">Due Date</label>
+    <my-date-picker [options]="myDatePickerOptions" formControlName="due_date"
+      (dateChanged)="onDateChanged($event)"></my-date-picker>
+    <!-- <div *ngIf="!isValid('due_date', 'required')" class="help-block">* Due date is required!</div> -->
+  </div>
   <!-- Actions -->
   <button [disabled]="!createTaskForm.valid" type="submit" class="btn btn-success">Create Task</button>
 </form>

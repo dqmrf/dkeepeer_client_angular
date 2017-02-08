@@ -8,6 +8,21 @@
       <input formControlName="email" type="email" 
         class="form-control" id="inputEmail" placeholder="Email">
         <div *ngIf="!isValid('email', 'required')" class="help-block">* Email is required!</div>
+        <div *ngIf="!isValid('email', 'pattern')" class="help-block">* Email is not correct!</div>
+    </div>
+    <!-- First Name -->
+    <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('first_name')}">
+      <label for="inputEmail" class="control-label">First Name</label>
+      <input formControlName="first_name" type="text" 
+        class="form-control" id="inputFirstName" placeholder="First Name">
+        <div *ngIf="!isValid('first_name', 'required')" class="help-block">* First Name is required!</div>
+    </div>
+    <!-- Last Name -->
+    <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('last_name')}">
+      <label for="inputEmail" class="control-label">Last Name</label>
+      <input formControlName="last_name" type="text" 
+        class="form-control" id="inputLastName" placeholder="Last Name">
+        <div *ngIf="!isValid('last_name', 'required')" class="help-block">* Last Name is required!</div>
     </div>
     <!-- Password -->
     <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('password')}">

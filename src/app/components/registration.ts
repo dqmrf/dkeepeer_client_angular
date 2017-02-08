@@ -15,7 +15,12 @@ export class RegistrationComponent {
     @Inject(FormBuilder) fb: FormBuilder
   ) {
     this.registerForm = fb.group({
-      email: ['', Validators.required],
+      email: ['', Validators.compose([
+        Validators.required, 
+        Validators.pattern("^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$")
+      ])],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       password_confirmation: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
     }, {validator: this.matchingPasswords('password', 'password_confirmation')});

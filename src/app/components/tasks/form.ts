@@ -2,13 +2,17 @@ import {
   Component, 
   Inject, 
   OnDestroy, 
-  forwardRef }         from '@angular/core';
+  forwardRef,
+  OnInit }             from '@angular/core';
 import { 
   FormBuilder, 
   FormGroup,
   Validators }         from '@angular/forms';
 import { TaskService } from '../../services/task';
 import { Task }        from '../../models/task';
+import { 
+  IMyOptions, 
+  IMyDateModel }       from 'mydatepicker';
 
 @Component({
   moduleId: module.id,
@@ -19,15 +23,32 @@ import { Task }        from '../../models/task';
 export class TaskFormComponent implements OnDestroy {
   createTaskForm: FormGroup;
   tasks: Task[] = [];
-
   private _tasksSubscription;
+  private _date: Date = new Date();
+  private myDatePickerOptions: IMyOptions = {
+    inline: true,
+    width: "100%",
+    dateFormat: 'dd-mm-yyyy',
+    disableUntil: {
+      year: this._date.getFullYear(), 
+      month: this._date.getMonth() + 1,
+      day: this._date.getDate() - 1 
+    }
+  };
 
   constructor(
+    @Inject(FormBuilder) fb: FormBuilder,
     @Inject(forwardRef(() => TaskService)) public _taskService: TaskService,
-    @Inject(FormBuilder) fb: FormBuilder
   ) {
     this.createTaskForm = fb.group({
-      title: ['', Validators.required]
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      priority: ['', Validators.compose([
+        Validators.required, 
+        Validators.maxLength(6), 
+        Validators.pattern("^[0-9]+$")])
+      ],
+      due_date: ['', Validators.required],
     });
     this._tasksSubscription = _taskService.tasks.subscribe((value) => { 
       if (value == undefined) return;
@@ -57,4 +78,6 @@ export class TaskFormComponent implements OnDestroy {
   ngOnDestroy() {
     this._tasksSubscription.unsubscribe();
   }
+
+  onDateChanged(event: IMyDateModel) {}
 }

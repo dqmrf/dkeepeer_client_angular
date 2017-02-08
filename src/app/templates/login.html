@@ -8,6 +8,7 @@
       <input formControlName="email" type="email" 
         class="form-control" id="inputEmail" placeholder="Email">
         <div *ngIf="!isValid('email', 'required')" class="help-block">* Email is required!</div>
+        <div *ngIf="!isValid('email', 'pattern')" class="help-block">* Email is not correct!</div>
     </div>
     <!-- Password -->
     <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('password')}">
