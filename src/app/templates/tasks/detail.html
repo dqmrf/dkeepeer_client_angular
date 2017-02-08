@@ -1,6 +1,5 @@
 <!-- Just Demo -->
 <div *ngIf="task">
-  <!-- <h3>{{task.title}}</h3> -->
-  <inline-edit [(ngModel)]="task.title" field="title" (update)="onUpdate($event);"
-    [required]="true" type="text"></inline-edit>
+  <inline-edit [(ngModel)]="task.title" field="title" label="Title"
+    (update)="onUpdate($event);" [required]="true" type="text"></inline-edit>
 </div>
