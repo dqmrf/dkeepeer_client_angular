@@ -59,7 +59,7 @@ export class TaskListComponent implements OnDestroy {
 
   refreshPipes(tasks: Task[]) {
     this.activeTasks = this.byFieldPipe.transform(tasks, 'completed', false);
-    this.completedTasks = this.byFieldPipe.transform(tasks, 'completed', false);
+    this.completedTasks = this.byFieldPipe.transform(tasks, 'completed', true);
   }
 
   ngOnDestroy() {
