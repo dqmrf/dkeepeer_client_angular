@@ -28,6 +28,7 @@
   </div>
   <div class="links">
     <a [routerLink]="['/admin/tasks', task.id, 'edit']" class="btn btn-primary">Edit Task</a>
-    <button (click)="goBack()" class="btn btn-default">Back</button>
+    <button (click)="delete(task);" type="button" class="btn btn-danger">Delete</button>
+    <button (click)="goBack();" class="btn btn-default">Back</button>
   </div>
 </div>

@@ -31,8 +31,9 @@
       <!-- <div *ngIf="!isValid('due_date', 'required')" class="help-block">* Due date is required!</div> -->
     </div>
     <!-- Actions -->
-    <button [disabled]="!editTaskForm.valid || !editTaskForm.dirty" type="submit" class="btn btn-success">Update Task</button>
+    <button [disabled]="!editTaskForm.valid || !editTaskForm.dirty" 
+      type="submit" class="btn btn-success">Update Task</button>
     <a [routerLink]="['/admin/tasks', taskId]" class="btn btn-primary">Show Task</a>
-    <button (click)="goBack()" class="btn btn-default">Back</button>
+    <button (click)="goBack();" type="button" class="btn btn-default">Back</button>
   </form>
 </div>

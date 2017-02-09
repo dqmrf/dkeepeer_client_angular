@@ -1,11 +1,24 @@
-<ul *ngIf="tasks" class="list-group">
-  <li class="list-group-item" *ngFor="let task of tasks">
-    <span class="task-id">{{task.id}}</span>
-    <a [routerLink]="['/admin/tasks', task.id]">
-      <span class="task-name">{{task.title}}</span>
-    </a>
-  </li>
-</ul>
-<div *ngIf="!tasks">
-  <h4>There are no tasks yet!</h4>
+<div *ngIf="isExists(tasks)">
+  <div *ngIf="isExists(activeTasks)" class="panel panel-success">
+    <div class="panel-heading">Active Tasks</div>
+    <ul class="list-group tasks-list">
+      <li class="list-group-item" *ngFor="let task of activeTasks">
+        <!-- Left side -->
+        <div class="actions left_actions">
+          <a [routerLink]="['/admin/tasks', task.id]">
+            <span class="task-name">{{task.title}}</span>
+          </a>
+        </div>
+        <!-- Right side -->
+        <div class="actions rigth_actions btn-group animated">
+          <a [routerLink]="['/admin/tasks', task.id, 'edit']" class="btn btn-primary btn-sm">Edit Task</a>
+          <button (click)="delete(task);" type="button" class="btn btn-danger btn-sm">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<!-- Not found -->
+<div *ngIf="!isExists(tasks)">
+  <h3>There are no tasks yet!</h3>
 </div>

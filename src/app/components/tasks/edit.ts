@@ -47,7 +47,6 @@ export class TaskEditComponent implements OnInit {
   }
 
   getTask() {
-    console.log(this.editTaskForm);
     this.route.params
       .switchMap((params: Params) => this._tasksService.getTask(+params['id']))
       .subscribe(task => {

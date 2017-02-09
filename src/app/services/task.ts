@@ -5,7 +5,6 @@ import { APP_CONFIG, AppConfig } from '../app.config';
 import { Task }                  from '../models/task';
 import { Subject }               from 'rxjs/Subject';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TaskService {
@@ -24,16 +23,12 @@ export class TaskService {
     this.tasks = new Subject<Task[]>();
   }
 
-  loadTasks() {
+  loadTasks(): Promise<Task[]> {
     const url = `${this.tasksUrl}?access_token=${localStorage.getItem("token")}`;
-    this.http.get(url)
-      .map(res => res.json())
-      .subscribe(data => {
-        this._tasks = data.tasks;
-        this.tasks.next(this._tasks);
-      }, error => {
-        this.handleError(error, 'Could not load task.');
-      });
+    return this.http.get(url)
+      .toPromise()
+      .then(res => res.json().tasks as Task[])
+      .catch(error => this.handleError(error, 'Could not load tasks!'));
   }
 
   getTask(id: number): Promise<Task> {
@@ -64,6 +59,16 @@ export class TaskService {
       .then(res => res.json() as Task)
       .catch(error => {
         this.handleError(error, 'Could not update task!')
+      });
+  }
+
+  delete(id: number) {
+    const url = `${this.tasksUrl}/${id}?access_token=${localStorage.getItem("token")}`;
+    return this.http.delete(url)
+      .toPromise()
+      .then(res => res.json() as Task)
+      .catch(error => {
+        this.handleError(error, 'Could not delete task!')
       });
   }
 

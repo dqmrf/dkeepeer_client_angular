@@ -24,6 +24,31 @@ app-root .mydp .inlinedp {
 /**
  * Tasks ______________________________
  */
+/* Index */
+.list-group.tasks-list .list-group-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-group.tasks-list .list-group-item .actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-group.tasks-list .list-group-item .actions.animated {
+  visibility: hidden;
+}
+
+.list-group.tasks-list .list-group-item:hover .actions.animated {
+  visibility: visible;
+}
+.list-group.tasks-list .alert {
+  width: 100%;
+  margin: 10px 0;
+}
+
 /* Show */
 .single-task .task-heading, .single-task .task-attributes {
   margin-bottom: 20px;
