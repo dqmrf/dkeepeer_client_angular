@@ -27,11 +27,6 @@ export class TasksDetailComponent implements OnInit {
       });
   }
 
-  save() {
-    this._taskService.update(this.task);
-      // .then(() => this.goBack());
-  }
-
   goBack() {
     this.location.back();
   }

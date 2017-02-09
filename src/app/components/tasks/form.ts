@@ -25,7 +25,7 @@ export class TaskFormComponent implements OnDestroy {
   tasks: Task[] = [];
   private _tasksSubscription;
   private _date: Date = new Date();
-  private myDatePickerOptions: IMyOptions = {
+  private datePickerOptions: IMyOptions = {
     inline: true,
     width: "100%",
     dateFormat: 'dd-mm-yyyy',
@@ -48,7 +48,7 @@ export class TaskFormComponent implements OnDestroy {
         Validators.maxLength(6), 
         Validators.pattern("^[0-9]+$")])
       ],
-      due_date: ['', Validators.required],
+      due_date: ['', Validators.required]
     });
     this._tasksSubscription = _taskService.tasks.subscribe((value) => { 
       if (value == undefined) return;
@@ -61,8 +61,17 @@ export class TaskFormComponent implements OnDestroy {
     .then(data => {
       this.tasks.unshift(data);
       this._taskService.tasks.next(this.tasks);
-      this.createTaskForm.reset();
+      this.resetForm();
     });
+  }
+
+  resetForm() {
+    this.createTaskForm.reset();
+    this.clearDate();
+  }
+
+  clearDate(): void {
+    this.createTaskForm.patchValue({due_date: ''});
   }
 
   isValid(field: string, rule: string): boolean {

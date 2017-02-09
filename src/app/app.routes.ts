@@ -6,6 +6,7 @@ import { AdminComponent }              from './components/admin';
 import { TasksComponent }              from './components/tasks';
 import { TasksDetailComponent }        from './components/tasks/detail';
 import { TasksDetailInlineComponent }  from './components/tasks/detail-inline';
+import { TaskEditComponent }           from './components/tasks/edit';
 import { PageNotFoundComponent }       from './components/errors/404';
 import { SignedInGuard }               from './guards/signed-in';
 import { SignedOutGuard }              from './guards/signed-out';
@@ -42,6 +43,10 @@ const routes: Routes = [
           { 
             path: 'tasks/:id', 
             component: TasksDetailComponent 
+          },
+          { 
+            path: 'tasks/:id/edit', 
+            component: TaskEditComponent 
           },
           { 
             path: 'tasks/:id/inline', 

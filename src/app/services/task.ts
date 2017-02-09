@@ -56,9 +56,10 @@ export class TaskService {
       });
   }
 
-  update(task) {
-    const url = `${this.tasksUrl}/${task.id}?access_token=${localStorage.getItem("token")}`;
-    this.http.put(url,  JSON.stringify(task), { headers: this.headers })
+  update(id: number, task) {
+    task['due_date'] = task['due_date']['formatted'];
+    const url = `${this.tasksUrl}/${id}?access_token=${localStorage.getItem("token")}`;
+    return this.http.put(url,  JSON.stringify(task), { headers: this.headers })
       .toPromise()
       .then(res => res.json() as Task)
       .catch(error => {

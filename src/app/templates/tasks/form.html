@@ -25,7 +25,7 @@
   <!-- Due Date -->
   <div class="form-group" [ngClass]="{'has-error': !isValidCompletely('due_date')}">
     <label for="inputDueDate" class="control-label">Due Date</label>
-    <my-date-picker [options]="myDatePickerOptions" formControlName="due_date"
+    <my-date-picker [options]="datePickerOptions" formControlName="due_date"
       (dateChanged)="onDateChanged($event)"></my-date-picker>
     <!-- <div *ngIf="!isValid('due_date', 'required')" class="help-block">* Due date is required!</div> -->
   </div>
