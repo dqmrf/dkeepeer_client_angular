@@ -1,3 +1,6 @@
+/**
+ * Global ______________________________
+ */
 /* Notifications */
 app-root .simple-notification .sn-title,
 app-root .simple-notification .sn-content {
@@ -16,4 +19,12 @@ app-root .simple-notification svg {
 /* Datepicker */
 app-root .mydp .inlinedp {
   width: 100%;
+}
+
+/**
+ * Tasks ______________________________
+ */
+/* Show */
+.single-task .task-heading, .single-task .task-attributes {
+  margin-bottom: 20px;
 }

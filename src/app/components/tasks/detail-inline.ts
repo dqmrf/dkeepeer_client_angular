@@ -7,10 +7,10 @@ import 'rxjs/add/operator/switchMap';
 
 @Component({
   moduleId: module.id,
-  templateUrl: '../../templates/tasks/detail.html'
+  templateUrl: '../../templates/tasks/detail-inline.html'
 })
 
-export class TasksDetailComponent implements OnInit {
+export class TasksDetailInlineComponent implements OnInit {
   public task: Task;
 
   constructor(
@@ -25,6 +25,11 @@ export class TasksDetailComponent implements OnInit {
       .subscribe(task => {
         this.task = task;
       });
+  }
+
+  onUpdate(res) {
+    this.task[res.field] = res.value;
+    this.save();
   }
 
   save() {

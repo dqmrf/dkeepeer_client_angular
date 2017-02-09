@@ -1,5 +1,33 @@
-<!-- Just Demo -->
-<div *ngIf="task">
-  <inline-edit [(ngModel)]="task.title" field="title" label="Title"
-    (update)="onUpdate($event);" [required]="true" type="text"></inline-edit>
+<div *ngIf="task" class="single-task">
+  <div class="task-heading">
+    <h3>{{ task.title }}</h3>
+    <span *ngIf="task.completed" class="label label-success">
+      Completed
+    </span>
+    <span *ngIf="!task.completed" class="label label-danger">
+      Active
+    </span>
+  </div>
+  <div class="task-attributes">
+    <p>
+      <b>Priority:</b>
+      {{ task.priority }}
+    </p>
+    <p>
+      <b>Due date:</b>
+      {{ task.due_date }}
+    </p>
+  </div>
+  <div class="task-description">
+    <p>
+      <b>Description:</b>
+    </p>
+    <p>
+      {{ task.description }}
+    </p>
+  </div>
+  <div class="links">
+    <a [routerLink]="['/admin/tasks', task.id, 'edit']" class="btn btn-primary">Edit</a>
+    <button (click)="goBack()" class="btn btn-default">Back</button>
+  </div>
 </div>
