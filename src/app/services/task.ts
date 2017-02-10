@@ -51,15 +51,22 @@ export class TaskService {
       });
   }
 
-  update(id: number, task) {
-    task['due_date'] = task['due_date']['formatted'];
-    const url = `${this.tasksUrl}/${id}?access_token=${localStorage.getItem("token")}`;
+  update(task) {
+    const url = `${this.tasksUrl}/${task.id}?access_token=${localStorage.getItem("token")}`;
+    if (task['due_date'] && task['due_date']['formatted']) {
+      task['due_date'] = task['due_date']['formatted'];
+    }
     return this.http.put(url,  JSON.stringify(task), { headers: this.headers })
       .toPromise()
       .then(res => res.json() as Task)
       .catch(error => {
         this.handleError(error, 'Could not update task!')
       });
+  }
+
+  updateById(id: number, task) {
+    task.id = id;
+    return this.update(task);
   }
 
   delete(id: number) {

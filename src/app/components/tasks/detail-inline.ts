@@ -33,7 +33,7 @@ export class TasksDetailInlineComponent implements OnInit {
   }
 
   save() {
-    this._taskService.update(this.task.id, this.task);
+    this._taskService.update(this.task);
   }
 
   goBack() {

@@ -31,7 +31,12 @@ export class TaskListComponent implements OnDestroy {
     });
   }
 
-  delete(task) {
+  update(task: Task) {
+    this._taskService.update(task)
+    .then(() => this.refreshTasks(this.tasks));
+  }
+
+  delete(task: Task) {
     if (confirm('Are you sure?')) {
       this._taskService.delete(task.id)
         .then(data => {

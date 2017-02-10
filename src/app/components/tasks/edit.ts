@@ -73,7 +73,7 @@ export class TaskEditComponent implements OnInit {
 
   update() {
     this._tasksService
-      .update(this.taskId, this.editTaskForm.value)
+      .updateById(this.taskId, this.editTaskForm.value)
       .then(() => {
         this._flash.success('', 'Task successfully updated!');
         this.goBack();

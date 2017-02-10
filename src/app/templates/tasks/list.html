@@ -1,5 +1,6 @@
 <div *ngIf="isExists(tasks)">
-  <div *ngIf="isExists(activeTasks)" class="panel panel-success">
+  <!-- Active Tasks -->
+  <div *ngIf="isExists(activeTasks)" class="panel panel-primary">
     <div class="panel-heading">Active Tasks</div>
     <ul class="list-group tasks-list">
       <li class="list-group-item" *ngFor="let task of activeTasks">
@@ -11,6 +12,35 @@
         </div>
         <!-- Right side -->
         <div class="actions rigth_actions btn-group animated">
+          <button [ngClass]="{'btn-success': !task.completed, 'btn-warning': task.completed }"
+            (click)="task.completed = !task.completed; update(task);" type="button" class="btn btn-sm">
+            <span *ngIf="!task.completed">Mark done</span>
+            <span *ngIf="task.completed">Mark active</span>
+          </button>
+          <a [routerLink]="['/admin/tasks', task.id, 'edit']" class="btn btn-primary btn-sm">Edit Task</a>
+          <button (click)="delete(task);" type="button" class="btn btn-danger btn-sm">Delete</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- Completed Tasks -->
+  <div *ngIf="isExists(completedTasks)" class="panel panel-success">
+    <div class="panel-heading">Completed Tasks</div>
+    <ul class="list-group tasks-list">
+      <li class="list-group-item" *ngFor="let task of completedTasks">
+        <!-- Left side -->
+        <div class="actions left_actions">
+          <a [routerLink]="['/admin/tasks', task.id]">
+            <span class="task-name">{{task.title}}</span>
+          </a>
+        </div>
+        <!-- Right side -->
+        <div class="actions rigth_actions btn-group animated">
+          <button [ngClass]="{'btn-success': !task.completed, 'btn-warning': task.completed }"
+            (click)="task.completed = !task.completed; update(task);" type="button" class="btn btn-sm">
+            <span *ngIf="!task.completed">Mark done</span>
+            <span *ngIf="task.completed">Mark active</span>
+          </button>
           <a [routerLink]="['/admin/tasks', task.id, 'edit']" class="btn btn-primary btn-sm">Edit Task</a>
           <button (click)="delete(task);" type="button" class="btn btn-danger btn-sm">Delete</button>
         </div>
