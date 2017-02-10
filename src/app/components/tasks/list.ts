@@ -14,6 +14,7 @@ export class TaskListComponent implements OnDestroy {
   tasks: Task[];
   activeTasks: Task[];
   completedTasks: Task[];
+  selectedTasks: Task[] = [];
   private _tasksSubscription;
 
   constructor(
@@ -31,9 +32,39 @@ export class TaskListComponent implements OnDestroy {
     });
   }
 
+  updateCheckedOptions(task, $event) {
+    let tasks = this.selectedTasks;
+    if ($event.target.checked) {
+      tasks.push(task.id);
+    } else {
+      tasks.forEach((t, index) => {
+        if (t === task.id) { 
+          tasks.splice(index, 1);
+          return;
+        }
+      });
+    }
+  }
+
   update(task: Task) {
     this._taskService.update(task)
-    .then(() => this.refreshTasks(this.tasks));
+      .then(() => this.refreshTasks(this.tasks));
+  }
+
+  batchDestroy(ids: Array<number>) {
+    this._taskService.batchDestroy(ids)
+      .then(ids => {
+        ids.forEach((id, i) => {
+          this.tasks.forEach((t, index) => {
+            if (t.id === id) {
+              this.tasks.splice(index, 1);
+              return;
+            }
+          });
+        }); 
+        this.refreshTasks(this.tasks);
+        this.selectedTasks = [];
+      });
   }
 
   delete(task: Task) {

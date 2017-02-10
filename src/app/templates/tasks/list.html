@@ -1,4 +1,11 @@
 <div *ngIf="isExists(tasks)">
+  <!-- Control Panel -->
+  <div class="panel panel-default cpanel">
+    <div class="panel-body">
+      <button [disabled]="!selectedTasks.length" (click)="batchDestroy(selectedTasks);"
+        class="btn btn-danger">Delete Selected</button>
+    </div>
+  </div>
   <!-- Active Tasks -->
   <div *ngIf="isExists(activeTasks)" class="panel panel-primary">
     <div class="panel-heading">Active Tasks</div>
@@ -6,6 +13,10 @@
       <li class="list-group-item" *ngFor="let task of activeTasks">
         <!-- Left side -->
         <div class="actions left_actions">
+          <label>
+            <input type="checkbox" name="selectedTasks" value="{{task}}"
+              (change)="updateCheckedOptions(task, $event)"/>
+          </label>
           <a [routerLink]="['/admin/tasks', task.id]">
             <span class="task-name">{{task.title}}</span>
           </a>
@@ -30,6 +41,10 @@
       <li class="list-group-item" *ngFor="let task of completedTasks">
         <!-- Left side -->
         <div class="actions left_actions">
+          <label>
+            <input type="checkbox" name="selectedTasks" value="{{task}}"
+              (change)="updateCheckedOptions(task, $event)"/>
+          </label>
           <a [routerLink]="['/admin/tasks', task.id]">
             <span class="task-name">{{task.title}}</span>
           </a>
@@ -46,6 +61,13 @@
         </div>
       </li>
     </ul>
+  </div>
+  <!-- Control Panel -->
+  <div class="panel panel-default cpanel">
+    <div class="panel-body">
+      <button [disabled]="!selectedTasks.length" (click)="batchDestroy(selectedTasks);"
+        class="btn btn-danger">Delete Selected</button>
+    </div>
   </div>
 </div>
 <!-- Not found -->

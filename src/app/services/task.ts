@@ -24,7 +24,7 @@ export class TaskService {
   }
 
   loadTasks(): Promise<Task[]> {
-    const url = `${this.tasksUrl}?access_token=${localStorage.getItem("token")}`;
+    const url = `${this.tasksUrl}?access_token=${localStorage.getItem('token')}`;
     return this.http.get(url)
       .toPromise()
       .then(res => res.json().tasks as Task[])
@@ -32,7 +32,7 @@ export class TaskService {
   }
 
   getTask(id: number): Promise<Task> {
-    const url = `${this.tasksUrl}/${id}?access_token=${localStorage.getItem("token")}`;
+    const url = `${this.tasksUrl}/${id}?access_token=${localStorage.getItem('token')}`;
     return this.http.get(url)
       .toPromise()
       .then(res => res.json() as Task)
@@ -42,7 +42,7 @@ export class TaskService {
   create(task): Promise<Task> {
     task['due_date'] = task['due_date']['formatted'];
     let body = JSON.stringify({task: task});
-    const url = `${this.tasksUrl}?access_token=${localStorage.getItem("token")}`;
+    const url = `${this.tasksUrl}?access_token=${localStorage.getItem('token')}`;
     return this.http.post(url, body, { headers: this.headers })
       .toPromise()
       .then(res => res.json() as Task)
@@ -52,11 +52,11 @@ export class TaskService {
   }
 
   update(task) {
-    const url = `${this.tasksUrl}/${task.id}?access_token=${localStorage.getItem("token")}`;
+    const url = `${this.tasksUrl}/${task.id}?access_token=${localStorage.getItem('token')}`;
     if (task['due_date'] && task['due_date']['formatted']) {
       task['due_date'] = task['due_date']['formatted'];
     }
-    return this.http.put(url,  JSON.stringify(task), { headers: this.headers })
+    return this.http.put(url, JSON.stringify(task), { headers: this.headers })
       .toPromise()
       .then(res => res.json() as Task)
       .catch(error => {
@@ -70,12 +70,23 @@ export class TaskService {
   }
 
   delete(id: number) {
-    const url = `${this.tasksUrl}/${id}?access_token=${localStorage.getItem("token")}`;
+    const url = `${this.tasksUrl}/${id}?access_token=${localStorage.getItem('token')}`;
     return this.http.delete(url)
       .toPromise()
       .then(res => res.json() as Task)
       .catch(error => {
         this.handleError(error, 'Could not delete task!')
+      });
+  }
+
+  batchDestroy(ids: Array<number>) {
+    let body = JSON.stringify({tasks: ids});
+    const url = `${this.tasksUrl}/batch_destroy?access_token=${localStorage.getItem('token')}`;
+    return this.http.delete(url, { body: body, headers: this.headers })
+      .toPromise()
+      .then(res => res.json().ids)
+      .catch(error => {
+        this.handleError(error, 'Could not delete tasks!')
       });
   }
 
