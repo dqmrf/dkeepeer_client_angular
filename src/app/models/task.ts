@@ -5,15 +5,6 @@ export class Task {
     public description: string,
     public priority: number,
     public due_date: any,
-    public completed: boolean,
-    private _marked: boolean = false
+    public completed: boolean
   ) {}
-
-  get marked(): boolean {
-    return this._marked;
-  }
-
-  set marked(m: boolean) {
-    this._marked = m;
-  }
 }
