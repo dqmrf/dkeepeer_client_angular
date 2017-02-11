@@ -36,10 +36,12 @@ export class TaskListComponent implements OnDestroy {
     let tasks = this.selectedTasks;
     if ($event.target.checked) {
       tasks.push(task.id);
+      task.marked = true;
     } else {
       tasks.forEach((t, index) => {
         if (t === task.id) { 
           tasks.splice(index, 1);
+          task.marked = false;
           return;
         }
       });
@@ -52,33 +54,47 @@ export class TaskListComponent implements OnDestroy {
   }
 
   batchDestroy(ids: Array<number>) {
-    this._taskService.batchDestroy(ids)
-      .then(ids => {
-        ids.forEach((id, i) => {
-          this.tasks.forEach((t, index) => {
-            if (t.id === id) {
-              this.tasks.splice(index, 1);
-              return;
+    if (confirm('Are you sure?')) {
+      this._taskService.batchDestroy(ids)
+        .then(ids => {
+          if (!ids) return false;
+          for (let i = 0; i < this.tasks.length; i++) {
+            if (this.tasks[i]['marked'] === true) {
+              this.tasks.splice(i, 1);
+              i--;
             }
-          });
-        }); 
-        this.refreshTasks(this.tasks);
-        this.selectedTasks = [];
-      });
+          }
+          this.refreshTasks(this.tasks);
+          this.selectedTasks = [];
+        });
+    }
   }
 
-  delete(task: Task) {
+  delete(task) {
+    let self = this;
+
     if (confirm('Are you sure?')) {
       this._taskService.delete(task.id)
         .then(data => {
           this.tasks.forEach((t, index) => {
-            if (t.id === task.id) { 
+            if (t.id === task.id) {
               this.tasks.splice(index, 1);
+              checkIfMarked();
             }
           });
           this.refreshTasks(this.tasks);
         });
     };
+
+    function checkIfMarked() {
+      if (task.marked === true) {
+        self.selectedTasks.forEach((selectedTask, j) => {
+          if (selectedTask == task.id) {
+            self.selectedTasks.splice(j, 1);
+          }
+        })
+      }
+    }
   }
 
   isExists(obj): boolean {

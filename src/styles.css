@@ -25,6 +25,8 @@ app-root .mydp .inlinedp {
  * Tasks ______________________________
  */
 /* Index */
+
+
 .list-group.tasks-list .list-group-item {
   display: flex;
   align-items: center;
@@ -35,6 +37,11 @@ app-root .mydp .inlinedp {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.list-group.tasks-list .list-group-item .actions.left_actions label {
+  margin: 0;
+  padding-right: 10px;
 }
 
 .list-group.tasks-list .list-group-item .actions.animated {

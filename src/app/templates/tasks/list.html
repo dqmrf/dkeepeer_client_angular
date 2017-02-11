@@ -62,13 +62,6 @@
       </li>
     </ul>
   </div>
-  <!-- Control Panel -->
-  <div class="panel panel-default cpanel">
-    <div class="panel-body">
-      <button [disabled]="!selectedTasks.length" (click)="batchDestroy(selectedTasks);"
-        class="btn btn-danger">Delete Selected</button>
-    </div>
-  </div>
 </div>
 <!-- Not found -->
 <div *ngIf="!isExists(tasks)">
