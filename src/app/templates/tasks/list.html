@@ -8,6 +8,10 @@
         class="btn btn-default">Check All</button>
       <button (click)="uncheckAll();"
         class="btn btn-default">Uncheck All</button>
+      <button *ngIf="!sorted" (click)="sortBy('title'); sorted = !sorted;"
+        class="btn btn-default">Sort by Title</button>
+      <button *ngIf="sorted" (click)="sortBy('id'); sorted = !sorted;"
+        class="btn btn-default">Sort by Id</button>
     </div>
   </div>
   <!-- Active Tasks -->

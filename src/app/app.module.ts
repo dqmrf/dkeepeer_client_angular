@@ -25,7 +25,6 @@ import { TaskFormComponent }          from './components/tasks/form';
 import { TasksDetailComponent }       from './components/tasks/detail';
 import { TasksDetailInlineComponent } from './components/tasks/detail-inline';
 import { TaskEditComponent }          from './components/tasks/edit';
-import { ByFieldPipe }                from './pipes/by-field';
 import { SimpleNotificationsModule }  from 'angular2-notifications';
 import { MyDatePickerModule }         from 'mydatepicker';
 // import { NgbModule }                  from '@ng-bootstrap/ng-bootstrap';
@@ -44,8 +43,7 @@ import './rxjs-extensions';
     TasksDetailComponent,
     TasksDetailInlineComponent,
     InlineEditComponent,
-    TaskEditComponent,
-    ByFieldPipe
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,

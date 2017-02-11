@@ -1,25 +1,28 @@
 import { Component, OnDestroy } from '@angular/core';
 import { TaskService }          from '../../services/task';
-import { ByFieldPipe }          from '../../pipes/by-field';
+import { FilterByFieldPipe }    from '../../pipes/filter-by-field';
+import { SortByFieldPipe }      from '../../pipes/sort-by-field';
 import { Task }                 from '../../models/task';
 
 @Component({
   moduleId: module.id,
   selector: 'tasks-list',
-  providers: [ByFieldPipe],
+  providers: [FilterByFieldPipe, SortByFieldPipe],
   templateUrl: '../../templates/tasks/list.html'
 })
 
 export class TaskListComponent implements OnDestroy {
-  tasks: Task[];
+  tasks: Task[] = [];
   activeTasks: Task[];
   completedTasks: Task[];
   selectedTasks: Array<number> = [];
+  sorted: boolean = false;
   private _tasksSubscription;
 
   constructor(
     private _taskService: TaskService,
-    private byFieldPipe: ByFieldPipe
+    private filterByField: FilterByFieldPipe,
+    private sortByField: SortByFieldPipe
   ) {
     this._taskService.loadTasks()
       .then(tasks => {
@@ -126,9 +129,15 @@ export class TaskListComponent implements OnDestroy {
     this.refreshPipes(tasks);
   }
 
+  sortBy(field: string) {
+    let desc = this.sorted === true ? true : false;
+    this.tasks = this.sortByField.transform(this.tasks, field, desc);
+    this.refreshTasks(this.tasks);
+  }
+
   refreshPipes(tasks: Task[]) {
-    this.activeTasks = this.byFieldPipe.transform(tasks, 'completed', false);
-    this.completedTasks = this.byFieldPipe.transform(tasks, 'completed', true);
+    this.activeTasks = this.filterByField.transform(tasks, 'completed', false);
+    this.completedTasks = this.filterByField.transform(tasks, 'completed', true);
   }
 
   ngOnDestroy() {

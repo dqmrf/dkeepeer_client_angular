@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'byField',
+  name: 'filterByField',
   pure: false
 })
 
-export class ByFieldPipe implements PipeTransform {
+export class FilterByFieldPipe implements PipeTransform {
   transform(items, key, value) {
     if (items) {
       return items.filter((item) => item[key] === value);
