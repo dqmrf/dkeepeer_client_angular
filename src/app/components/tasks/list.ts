@@ -14,7 +14,7 @@ export class TaskListComponent implements OnDestroy {
   tasks: Task[];
   activeTasks: Task[];
   completedTasks: Task[];
-  selectedTasks: Task[] = [];
+  selectedTasks: Array<number> = [];
   private _tasksSubscription;
 
   constructor(
@@ -30,22 +30,6 @@ export class TaskListComponent implements OnDestroy {
       this.tasks = value;
       this.refreshPipes(value);
     });
-  }
-
-  updateCheckedOptions(task, $event) {
-    let tasks = this.selectedTasks;
-    if ($event.target.checked) {
-      tasks.push(task.id);
-      task.marked = true;
-    } else {
-      tasks.forEach((t, index) => {
-        if (t === task.id) { 
-          tasks.splice(index, 1);
-          task.marked = false;
-          return;
-        }
-      });
-    }
   }
 
   update(task: Task) {
@@ -95,6 +79,39 @@ export class TaskListComponent implements OnDestroy {
         })
       }
     }
+  }
+
+  updateCheckedOptions(task, $event) {
+    let tasks = this.selectedTasks;
+    if ($event.target.checked) {
+      tasks.push(task.id);
+      task.marked = true;
+    } else {
+      tasks.forEach((t, index) => {
+        if (t === task.id) { 
+          tasks.splice(index, 1);
+          task.marked = false;
+          return;
+        }
+      });
+    }
+  }
+
+  checkAll() {
+    this.selectedTasks = [];
+    this.tasks.forEach((task, i) => {
+      this.selectedTasks.push(task.id);
+      task.marked = true;
+    });
+  }
+
+  uncheckAll() {
+    this.selectedTasks = [];
+    this.tasks.forEach((task, i) => {
+      if (task.marked === true) {
+        task.marked = false
+      }
+    });
   }
 
   isExists(obj): boolean {

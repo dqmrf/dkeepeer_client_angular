@@ -4,6 +4,10 @@
     <div class="panel-body">
       <button [disabled]="!selectedTasks.length" (click)="batchDestroy(selectedTasks);"
         class="btn btn-danger">Delete Selected</button>
+      <button (click)="checkAll();"
+        class="btn btn-default">Check All</button>
+      <button (click)="uncheckAll();"
+        class="btn btn-default">Uncheck All</button>
     </div>
   </div>
   <!-- Active Tasks -->
@@ -14,7 +18,7 @@
         <!-- Left side -->
         <div class="actions left_actions">
           <label>
-            <input type="checkbox" name="selectedTasks" value="{{task}}"
+            <input type="checkbox" name="selectedTasks" value="{{task}}" [checked]="task.marked"
               (change)="updateCheckedOptions(task, $event)"/>
           </label>
           <a [routerLink]="['/admin/tasks', task.id]">
@@ -42,7 +46,7 @@
         <!-- Left side -->
         <div class="actions left_actions">
           <label>
-            <input type="checkbox" name="selectedTasks" value="{{task}}"
+            <input type="checkbox" name="selectedTasks" value="{{task}}" [checked]="task.marked"
               (change)="updateCheckedOptions(task, $event)"/>
           </label>
           <a [routerLink]="['/admin/tasks', task.id]">
