@@ -18,6 +18,7 @@ import { LoginComponent }             from './components/login';
 import { NavbarComponent }            from './components/navbar';
 import { InlineEditComponent }        from './components/inline-edit';
 import { RegistrationComponent }      from './components/registration';
+import { ConfirmEmailComponent }      from './components/confirm-email';
 import { AdminComponent }             from './components/admin';
 import { TasksComponent }             from './components/tasks';
 import { TaskListComponent }          from './components/tasks/list';
@@ -35,6 +36,7 @@ import './rxjs-extensions';
     AppComponent,
     LoginComponent,
     RegistrationComponent,
+    ConfirmEmailComponent,
     NavbarComponent,
     AdminComponent,
     TasksComponent,

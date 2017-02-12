@@ -1,0 +1,10 @@
+<div *ngIf="loading">
+  <h3>Please wait...</h3>
+</div>
+<div *ngIf="!loading">
+  <h2>Congratulations!</h2>
+  <h4>Your Email address was successfully confirmed.</h4>
+  <div class="actions">
+    <a routerLink='/login'>Login</a>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { NgModule }                    from '@angular/core';
 import { Routes, RouterModule }        from '@angular/router';
 import { LoginComponent }              from './components/login';
 import { RegistrationComponent }       from './components/registration';
+import { ConfirmEmailComponent }       from './components/confirm-email';
 import { AdminComponent }              from './components/admin';
 import { TasksComponent }              from './components/tasks';
 import { TasksDetailComponent }        from './components/tasks/detail';
@@ -26,6 +27,11 @@ const routes: Routes = [
     path: 'registration',
     canActivate: [ SignedInGuard ],
     component: RegistrationComponent
+  },
+  {
+    path: 'confirm_email',
+    canActivate: [ SignedInGuard ],
+    component: ConfirmEmailComponent
   },
   {
     path: 'admin',

@@ -12,13 +12,13 @@ export class AppConfig {
 const CONFIG_PRODUCTION: AppConfig = {
   serverUrl: "http://localhost:3000",
   apiEndpoint: "http://localhost:3000/api",
-  clientId: "4ea0017b14c0fdf8831b50de281fe003f062576381d35b9b9eb309eae5cccba6"
+  clientId: "051476c1165ee4094f9102db43c5a70381f1dc6cce8012aa855dbc935d126541"
 };
 
 const CONFIG_DEVELOPMENT: AppConfig = {
   serverUrl: "http://localhost:3000",
   apiEndpoint: "http://localhost:3000/api",
-  clientId: "4ea0017b14c0fdf8831b50de281fe003f062576381d35b9b9eb309eae5cccba6"
+  clientId: "051476c1165ee4094f9102db43c5a70381f1dc6cce8012aa855dbc935d126541"
 };
 
 export function appConfig(): AppConfig {

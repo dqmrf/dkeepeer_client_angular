@@ -1,6 +1,7 @@
 import { Injectable, Inject }    from '@angular/core';
 import { Http, Headers }         from '@angular/http';
 import { Router }                from '@angular/router';
+import { Location }              from '@angular/common';
 import { Subject }               from 'rxjs/Subject';
 import { APP_CONFIG, AppConfig } from '../app.config';
 import { NotificationsService }  from 'angular2-notifications';
@@ -9,7 +10,6 @@ import { NotificationsService }  from 'angular2-notifications';
 export class AuthService {
   public accessToken: string;
   public isLoggedIn: Subject<boolean> = new Subject<boolean>();
-  public redirectUrl: string;
 
   private tokenUrl: string;
   private baseUrl: string;
@@ -19,6 +19,7 @@ export class AuthService {
   constructor(
     private http: Http,
     private router: Router,
+    private location: Location,
     private _flash: NotificationsService,
     @Inject(APP_CONFIG) config: AppConfig
   ) {
@@ -55,12 +56,26 @@ export class AuthService {
       .subscribe(res => {
         if (res.status == 200) {
           this.router.navigate(['/login']);
-          this._flash.success('', 'Registration successfully!');
-          this._flash.alert('', 'Please sign in!');
+          this._flash.success(
+            'Registration successfully!', 
+            'Please check your mailbox and confirm your email address'
+          );
         }
       }, error => {
         this.handleError(error.text(), 'Registration failed!')
       });
+  }
+
+  checkConfirmationToken(confirmation_token: string): Promise<Object> {
+    const url = `${this.baseUrl}/api/users/${confirmation_token}/confirm_email`;
+    return this.http.get(url)
+      .toPromise()
+      .then(res => res.json())
+      .catch(error => {
+        this.router.navigate(['/login']);
+        this.handleError(error, 'Could not confirm email address!');
+      });
+
   }
 
   private setAccessToken(token: string) {
