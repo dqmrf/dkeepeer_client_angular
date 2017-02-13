@@ -44,6 +44,8 @@
     "tslint": "^4.3.0",
     "typescript": "~2.0.3"
   },
-  "devDependencies": {
+  "devDependencies": {},
+  "engines": {
+    "node": "7.4.0"
   }
 }
