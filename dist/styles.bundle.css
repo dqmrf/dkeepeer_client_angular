@@ -1,0 +1,76 @@
+/**
+ * Global ______________________________
+ */
+/* Notifications */
+app-root .simple-notification .sn-title,
+app-root .simple-notification .sn-content {
+  padding: 0 30px 0 0;
+}
+app-root .simple-notification .sn-progress-loader {
+  height: 3px;
+}
+app-root .simple-notification svg {
+  width: 28px;
+  height: 28px;
+  margin: 6px;
+  padding: 0px;
+}
+
+/* Datepicker */
+app-root .mydp .inlinedp {
+  width: 100%;
+}
+
+/**
+ * Tasks ______________________________
+ */
+/* Index */
+
+
+.list-group.tasks-list .list-group-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.list-group.tasks-list .list-group-item .actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.list-group.tasks-list .list-group-item .actions.left_actions label {
+  margin: 0;
+  padding-right: 10px;
+}
+
+.list-group.tasks-list .list-group-item .actions.animated {
+  visibility: hidden;
+}
+
+.list-group.tasks-list .list-group-item:hover .actions.animated {
+  visibility: visible;
+}
+.list-group.tasks-list .alert {
+  width: 100%;
+  margin: 10px 0;
+}
+
+/* Show */
+.single-task .task-heading, .single-task .task-attributes {
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=styles.bundle.map*/
