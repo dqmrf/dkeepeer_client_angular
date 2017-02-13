@@ -11,8 +11,7 @@ import { AuthService }    from '../services/auth';
 @Injectable()
 export class SignedOutGuard implements CanActivate, CanActivateChild {
   constructor(
-    private router: Router,
-    private _authService: AuthService
+    private router: Router
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
@@ -26,7 +25,6 @@ export class SignedOutGuard implements CanActivate, CanActivateChild {
 
   checkLogin(url: string): boolean {
     if (localStorage.getItem('token')) {return true;}
-    this._authService.redirectUrl = url;
     this.router.navigate(['/login']);
     return false;
   }
